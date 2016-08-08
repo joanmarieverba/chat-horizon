@@ -31,7 +31,7 @@ const options = {
     allow_unauthenticated: true
   },
   permissions: false,
-  project_name: 'react_webpack_horizon',
+  project_name: 'jmv',
   rdb_host: urlRethinkDB.hostname,
   rdb_port: urlRethinkDB.port
 };
