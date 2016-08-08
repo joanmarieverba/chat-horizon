@@ -3,6 +3,9 @@ import ChatForm from './ChatForm.jsx';
 import ChatList from './ChatList.jsx';
 import elementalStyles from '../node_modules/elemental/less/elemental.less';
 import { browserHistory } from 'react-router';
+import Horizon from '@horizon/client';
+import stores from './stores.jsx';
+import {chat} from './stores.jsx';
 
 
 var chatpageStyle = {
@@ -23,7 +26,7 @@ var chatpageStyle = {
   //  fontFamily: "Vast Shadow",
    fontFamily: "Bungee",
    fontSize: "48px",
-   webkitTextStroke: "1px black",
+   WebkitTextStroke: "1px black",
    color: "yellow",
  }
 
@@ -33,14 +36,25 @@ export default class Chat extends Component {
     this.state = {
       messageArray: [],
     }
+    chat.watch().subscribe( (results) => {
+		this.setState({
+			messageArray: results
+    });
+  });
   }
 
   handleNewMsg(gmt, message) {   //method
     console.log ("chatgmt ", gmt, "chatmsg ", message, this);
-    var newMessageArray = Array.prototype.slice.call(this.state.messageArray);
-    newMessageArray.push({gmt: gmt, message: message, nickname: this.props.params.nickname});
-    this.setState({messageArray: newMessageArray});
-  }
+      chat.store( {
+	      message: message,
+	      nickname: this.props.params.nickname,
+	      gmt: gmt,
+  })}
+  //   console.log ("chatgmt ", gmt, "chatmsg ", message, this);
+  //   var newMessageArray = Array.prototype.slice.call(this.state.messageArray);
+  //   newMessageArray.push({gmt: gmt, message: message, nickname: this.props.params.nickname});
+  //   this.setState({messageArray: newMessageArray});
+  // }
 
  //react calls render over and over again by the brower when it refreshes
     render() {

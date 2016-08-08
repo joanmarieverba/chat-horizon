@@ -1,0 +1,11 @@
+# This is a TOML document
+
+[collections.messageArray]
+
+[collections.messages]
+
+[collections.files]
+
+[groups.admin]
+[groups.admin.rules.carte_blanche]
+template = "any()"

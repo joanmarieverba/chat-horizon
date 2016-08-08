@@ -21,7 +21,7 @@ export default class ChatList extends Component {
       <div style={chatStyle}>
       {this.props.messageArray.map((item) => {
         return (
-          <ChatItem nickname={item.nickname} gmt={item.gmt} message={item.message}/>
+          <ChatItem nickname={item.nickname} gmt={item.gmt} message={item.message} key={item.id}/>
         )})}
       </div>
     )

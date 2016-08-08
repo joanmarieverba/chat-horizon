@@ -34,7 +34,7 @@ var instructions = {
   display: "inline-block",
   fontSize: "32px",
   fontWeight: "bold",
-  webkitTextStroke: "1px black",
+  WebkitTextStroke: "1px black",
 }
 
 var inputBox = {

@@ -1,41 +1,47 @@
 {
-  "name": "chat",
+  "name": "react-webpack-horizon",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "hjs-dev-server",
-    "build": "webpack"
+    "start": "npm-run-all --parallel serve:dev:server serve:dev:client",
+    "start:prod": "npm run schema:restore && npm run serve:prod",
+    "deploy": "npm run build:prod && npm run schema:dump && git push deploy -f",
+    "build:dev": "webpack",
+    "build:prod": "NODE_ENV=production webpack",
+    "serve:dev:client": "hjs-dev-server",
+    "serve:dev:server": "hz serve --dev",
+    "serve:prod": "node ./util/server/express.js",
+    "schema:dump": "hz get-schema -o ./.hz/schema.toml",
+    "schema:restore": "hz set-schema ./.hz/schema.toml --connect $(./util/scripts/parseurl.sh $RETHINKDB_URL)"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/joanmarieverba/chat.git"
+    "url": "git+https://github.com/jimthedev/react-webpack-horizon.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/joanmarieverba/chat/issues"
+    "url": "https://github.com/jimthedev/react-webpack-horizon/issues"
   },
-  "homepage": "https://github.com/joanmarieverba/chat#readme",
+  "homepage": "https://github.com/jimthedev/react-webpack-horizon#readme",
   "dependencies": {
-    "css-loader": "^0.23.1",
-    "elemental": "^0.6.0",
-    "file-loader": "^0.9.0",
+    "@horizon/client": "^1.1.3",
+    "@horizon/server": "^1.1.3",
+    "express": "^4.14.0",
     "hjs-webpack": "^8.3.0",
-    "postcss-loader": "^0.9.1",
+    "horizon": "^1.1.3",
+    "normalize.css": "^4.2.0",
+    "npm-run-all": "^2.3.0",
     "react": "^15.3.0",
-    "react-addons-css-transition-group": "^15.3.0",
-    "react-dom": "^15.3.0",
-    "react-router": "^2.6.1",
-    "style-loader": "^0.13.1",
-    "url-loader": "^0.5.7"
+    "react-dom": "^15.3.0"
   },
   "devDependencies": {
-    "babel-core": "^6.11.4",
+    "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "babel-preset-react-hmre": "^1.1.1",
     "css-loader": "^0.23.1",
