@@ -30,6 +30,8 @@ const options = {
     allow_anonymous: true,
     allow_unauthenticated: true
   },
+  auto_create_collection: true,
+  auto_create_index: true,
   permissions: false,
   project_name: 'jmv',
   rdb_host: urlRethinkDB.hostname,
